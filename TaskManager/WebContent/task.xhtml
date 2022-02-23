@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Manage Task</title>
+    <style>
+#bordas {
+    background-color: #F8F8FC;
+}
+#rodape {
+    background-color: #167A89;
+    color: #F7FBFC;
+}
+
+.fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  
+</style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+</h:head>
+<h:body>
+ <div class="container">   
+ <div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>Task Manager</h1>
+  <p>Task Manager</p> 
+</div>
+         <br />
+         	<p:messages id="messages" showDetail="true" closable="true" autoUpdate = "true"/>
+		        
+            <h:form id="formUp">
+           
+                <p:panel id="panel" header="Add task">
+
+                    <h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto;">
+                        <p:outputLabel value="" /> &#160;&#160; 
+                        <h:inputHidden value="#{taskMBean.task.id}" id="hiddenId" />
+                        
+                        <p:outputLabel value="Título" /> &#160;&#160; 
+                        <p:inputText id="titulo" value="#{taskMBean.task.titulo}" style="width:550px"
+                            label="titulo" required="true" requiredMessage="Please enter your title" validator="noBlankSpaceValidator">
+                        </p:inputText>
+                           
+                        <p:outputLabel value="Descrição" /> &#160;&#160; 
+                        <p:inputText id="description" value="#{taskMBean.task.description}" style="width:550px"
+                            label="description" required="true" requiredMessage="Please enter your description" validator="noBlankSpaceValidator">
+                        </p:inputText>
+                        
+                        <p:outputLabel value="Responsável" /> &#160;&#160;
+                        <p:inputText id="responsavel" value="#{taskMBean.task.responsavel}" style="width:550px"
+                            label="responsavel" required="true" requiredMessage="Please enter your responsavel" validator="noBlankSpaceValidator">
+                        </p:inputText>
+                        
+                        <p:outputLabel value="Prioridade" /> &#160;&#160;
+                        
+                        <p:selectOneRadio id = "piori" value="#{taskMBean.task.priori}">
+                        	<f:selectItem itemValue = "Alto" itemLabel = "Alto" />
+                        	<f:selectItem itemValue = "Medio" itemLabel = "Medio" />
+                        	<f:selectItem itemValue = "Baixo" itemLabel = "Baixo" />
+                        </p:selectOneRadio>
+                        
+                        <p:outputLabel value="Deadline" /> &#160;&#160;
+               			
+               			<h:inputText value="#{taskMBean.task.deadLine}">  
+  						<f:convertDateTime pattern="dd-MM-yyyy"/>  </h:inputText>
+
+
+                        <h:message for="description" style="color:red"/>
+                    </h:panelGrid>
+                    <p:commandButton value="Save" update="panel :formDown:tbl"
+                        action="#{taskMBean.save}" style="display:none">
+                        	<!-- <f:ajax render=":formDown:tbl"/>  -->
+                        </p:commandButton>
+                </p:panel>
+            </h:form>
+            
+            <br />
+            <h:form id="formDown">
+                <p:dataTable id="tbl" var="task" value="#{taskMBean.taskList}"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                    paginator="true" rows="10" style="margin-bottom:20px;" lazy="true">
+                 	
+                 	<p:column headerText="Titulo">
+                        <h:outputText value="#{task.titulo}" />
+                    </p:column>
+                    
+                    <p:column headerText="Description">
+                        <h:outputText value="#{task.description}" />
+                    </p:column>
+                    
+                    <p:column headerText="Responsavel">
+                        <h:outputText value="#{task.responsavel}" />
+                    </p:column>
+                    
+                    <p:column headerText="Prioridade">
+                        <h:outputText value="#{task.priori}" />
+                    </p:column>
+                    
+                     <p:column headerText="Deadline">
+                        <h:outputText value="#{task.deadLine}" >
+                        	  <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Actions" exportable="false" style="width:110px; text-align: center;">
+
+                        <h:commandLink action="#{taskMBean.setAsCompleted(task)}"><i class="fa fa-check" title="Complete"></i></h:commandLink>
+                        <h:commandLink action="#{taskMBean.edit(task)}"><i class="fa fa-pencil" title="Edit"></i></h:commandLink>
+						<h:commandLink action="#{taskMBean.delete(task)}" title="Delete" onclick="if (! confirm('Really want to delete it?')) return false"><i class="fa fa-trash"></i>
+                        </h:commandLink>
+                        
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+    
+    </div>
+</h:body>
+</html>

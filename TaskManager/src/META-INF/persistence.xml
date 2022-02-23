@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+    xmlns="http://java.sun.com/xml/ns/persistence">
+     
+<persistence-unit name="TaskManager">
+<provider>org.hibernate.ejb.HibernatePersistence</provider>
+ <class>com.todo.model.Task</class> 
+ 
+ <properties>
+ <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+ <property name="hibernate.hbm2ddl.auto" value="update" /> <!-- update garante que as novas informações sejam automaticamente atualizadas no BD -->
+ <property name="hibernate.show_sql" value="true" />
+ <property name="hibernate.format_sql" value="true" />
+ <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+ <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres" ></property>
+ <property name="javax.persistence.jdbc.user" value="postgres" />
+ <property name="javax.persistence.jdbc.password" value="garfo010203!" />
+ 
+ <!-- This property as added to desable a not important warning between Spring boot and postgres-->
+ <!--<property name="hibernate.jdbc.lob.non_contextual_creation" value="true"/>-->  
+ <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
+ 
+ </properties>
+ 
+ </persistence-unit>
+</persistence>
+
+    
+   
