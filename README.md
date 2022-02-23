@@ -16,7 +16,7 @@ com as seguintes funcionalidades:
 ITENS UTILIZADOS
 ------------
 
-a) Criar uma aplicação Java Web utilizando JavaServer Faces (JSF): Realziado
+a) Criar uma aplicação Java Web utilizando JavaServer Faces (JSF): Realizado
 
 -Além da utilização do primefaces e outras bibliotecas para ajudar na organização do front-end, a aplicação teve como base principal 3 classes:
 
