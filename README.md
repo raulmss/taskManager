@@ -17,16 +17,22 @@ ITENS UTILIZADOS
 ------------
 
 a) Criar uma aplicação Java Web utilizando JavaServer Faces (JSF): Realziado
+
 -Além da utilização do primefaces e outras bibliotecas para ajudar na organização do front-end, a aplicação teve como base principal 3 classes:
+
 ####Task.java:
+
 Classe que contém todos os atributos relacionados ao objeto tarefa. Além dos getters and setters de uma das variáveis, também contém notações importantes
-para sinalizar ao JPA/Hibernate que essa classe é o Model utilizado para criar as tabelas, onde um desses sinalizadores (@Entity, @Table, @Column) deixa a responsabilidade da chave primária
-inteiramente para o banco de dados (@Id, @GeneratedValue).
+para sinalizar ao JPA/Hibernate que essa classe é o Model utilizado para criar as tabelas, onde um desses sinalizadores (@Entity, @Table, @Column) deixa a responsabilidade da chave primária inteiramente para o banco de dados (@Id, @GeneratedValue).
+
 ####TaskDao.java
+
 Camada de persistência (Date Access Object), utilizando o padrão de projeto Singleton, utilizando um administrador de entidade único para lidar com o banco de dados
 e delineia cada uma das operações do CRUD, além de outras funções como public Task findTask(Long id) e public void setAsCompleted(Task task). Dessa é possível
 que todos os dados possam ser manipulados de maneira mais segura.
+
 ####TaskMBean.java
+
 Essa camada está entre os acessos da classe TaskDao e as interações do usuário com a tela. Nela definimos os comportamentos dos métodos utilizados no task.xhtml (interface do usuário).
 
 b) Utilizar persistência em um banco de dados PostgreSQL: Realizado
